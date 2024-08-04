@@ -1,0 +1,20 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n, m, a, b;
+    cin >> n >> m >> a >> b;
+
+    int cost_single_tickets = n * a;
+
+    int cost_multi_tickets = ((n + m - 1) / m) * b; // ceiling division for (n / m)
+
+    int cost_combination_tickets = (n / m) * b + (n % m) * a;
+
+    int min_cost = min({cost_single_tickets, cost_multi_tickets, cost_combination_tickets});
+
+    cout << min_cost << endl;
+
+    return 0;
+}

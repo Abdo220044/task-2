@@ -1,0 +1,50 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int r, c;
+    cin >> r >> c;
+    vector<string> cake(r);
+    for (int i = 0; i < r; ++i) {
+        cin >> cake[i];
+    }
+
+    vector<bool> row_eatable(r, true);
+    vector<bool> col_eatable(c, true);
+
+    for (int i = 0; i < r; ++i) {
+        for (int j = 0; j < c; ++j) {
+            if (cake[i][j] == 'S') {
+                row_eatable[i] = false;
+                col_eatable[j] = false;
+            }
+        }
+    }
+
+    int max_eatable_cells = 0;
+
+    for (int i = 0; i < r; ++i) {
+        if (row_eatable[i]) {
+            for (int j = 0; j < c; ++j) {
+                if (cake[i][j] == '.') {
+                    max_eatable_cells++;
+                }
+            }
+        }
+    }
+
+    for (int j = 0; j < c; ++j) {
+        if (col_eatable[j]) {
+            for (int i = 0; i < r; ++i) {
+                if (cake[i][j] == '.' && !row_eatable[i]) {
+                    max_eatable_cells++;
+                }
+            }
+        }
+    }
+
+    cout << max_eatable_cells << endl;
+
+    return 0;
+}
